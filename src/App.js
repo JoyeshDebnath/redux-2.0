@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import bootstrap from "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap";
+import { Button } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { Increase, Decrease } from "./actions/counterActions";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const counter = useSelector((state) => state.counter);
+	const isLogged = useSelector((state) => state.isLogged);
+	const dispatch = useDispatch();
+
+	console.log(counter, isLogged);
+	return (
+		<div className="container">
+			<h1>
+				Counter: <span style={{ color: "green" }}>{counter}</span>
+			</h1>
+			<Button
+				className="btn btn-primary m-4"
+				onClick={() => dispatch(Increase())}
+			>
+				ADD
+			</Button>
+			<Button
+				className="btn btn-danger m-4"
+				onClick={() => dispatch(Decrease())}
+			>
+				Subtract
+			</Button>
+		</div>
+	);
 }
 
 export default App;
